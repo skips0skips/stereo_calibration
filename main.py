@@ -31,29 +31,29 @@ def _load_images(filepath):
 
 def read_yaml():
 
-    cam_plg_left = str(Path('calib','cam_plg_left.yml'))
-    fs = cv2.FileStorage(cam_plg_left, cv2.FILE_STORAGE_READ)
-    cam_plg_right = str(Path('calib','cam_plg_right.yml'))
-    extrinsics = str(Path('calib','extrinsics.yml'))    
-    # Чтение данных из intrinsics.yml (левая камера)
-    with open(cam_plg_left) as file:
-        intrinsics_data = yaml.safe_load(file, Loader=yaml.FullLoader)
-        left_camera_matrix = intrinsics_data['camera_matrix']
-        left_distortion_coeffs = intrinsics_data['distortion_coefficients']
+    # cam_plg_left = str(Path('calib','cam_plg_left.yml'))
+    # fs = cv2.FileStorage(cam_plg_left, cv2.FILE_STORAGE_READ)
+    # cam_plg_right = str(Path('calib','cam_plg_right.yml'))
+    # extrinsics = str(Path('calib','extrinsics.yml'))    
+    # # Чтение данных из intrinsics.yml (левая камера)
+    # with open(cam_plg_left) as file:
+    #     intrinsics_data = yaml.safe_load(file, Loader=yaml.FullLoader)
+    #     left_camera_matrix = intrinsics_data['camera_matrix']
+    #     left_distortion_coeffs = intrinsics_data['distortion_coefficients']
 
-    # Чтение данных из intrinsics.yml (правая камера)
-    with open(cam_plg_right, 'r') as file:
-        intrinsics_data = yaml.safe_load(file, Loader=yaml.Loader)
-        right_camera_matrix = intrinsics_data['camera_matrix']
-        right_distortion_coeffs = intrinsics_data['distortion_coefficients']
+    # # Чтение данных из intrinsics.yml (правая камера)
+    # with open(cam_plg_right, 'r') as file:
+    #     intrinsics_data = yaml.safe_load(file, Loader=yaml.Loader)
+    #     right_camera_matrix = intrinsics_data['camera_matrix']
+    #     right_distortion_coeffs = intrinsics_data['distortion_coefficients']
 
-    # Чтение данных из extrinsics.yml
-    with open(extrinsics, 'r') as file:
-        extrinsics_data = yaml.safe_load(file, Loader=yaml.Loader)
-        R = extrinsics_data['R']
-        T = extrinsics_data['T']
-        E = extrinsics_data['E']
-        F = extrinsics_data['F']
+    # # Чтение данных из extrinsics.yml
+    # with open(extrinsics, 'r') as file:
+    #     extrinsics_data = yaml.safe_load(file, Loader=yaml.Loader)
+    #     R = extrinsics_data['R']
+    #     T = extrinsics_data['T']
+    #     E = extrinsics_data['E']
+    #     F = extrinsics_data['F']
 
 
 
