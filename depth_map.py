@@ -39,6 +39,7 @@ def preprocess_image(image):
     image = cv2.equalizeHist(image)
     return image
 
+
 def main():
     # Загружаем видео с левой и правой камеры
     pathL = str(Path('data','kem.011.001.left.avi'))
