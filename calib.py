@@ -102,6 +102,28 @@ def calibrate_right(calib_df, results_dict):
 
 	return calib_df, results_dict
 
+def save(results_dict,calib_df,calibration_dir):
+	np.savez(
+		"{}/calibration_left.npz".format(calibration_dir),
+		left_map = results_dict["left_map_x_undistort"], 
+		right_map = results_dict["left_map_y_undistort"], 
+		objpoints = calib_df["object_points"].to_numpy(), 
+		imgpoints = calib_df["left_corners"].to_numpy(),
+		camera_matrix = results_dict["left_camera_matrix"], 
+		distortion_coeff = results_dict["left_dist"], 
+		imageSize = results_dict["DIM"]
+		)
+	np.savez(
+		"{}/calibration_right.npz".format(calibration_dir),
+		left_map = results_dict["right_map_x_undistort"], 
+		right_map = results_dict["right_map_y_undistort"], 
+		objpoints = calib_df["object_points"].to_numpy(), 
+		imgpoints = calib_df["right_corners"].to_numpy(),
+		camera_matrix = results_dict["right_camera_matrix"], 
+		distortion_coeff = results_dict["right_dist"], 
+		imageSize = results_dict["DIM"]
+		)
+	pass
 def main(pathleft,pathright):
     # Путь к видеофайлам
     pathL = str(Path('data',pathleft))
@@ -299,6 +321,10 @@ def main(pathleft,pathright):
         size = results_dict["DIM"], 
         m1type = cv2.CV_16SC2)
     
+    calibration_dir = "./calibration_results"
+	#созраняем результаты
+    save(results_dict,calib_df,calibration_dir)
+    
     results_dict["left_map_x_rectify"], results_dict["left_map_y_rectify"] = cv2.initUndistortRectifyMap(
 	cameraMatrix = results_dict["left_camera_matrix"], 
 	distCoeffs = results_dict["left_dist"], 
@@ -349,6 +375,11 @@ def main(pathleft,pathright):
 
     cv2.imshow('',joined_undistorted_small)
     cv2.waitKey()
+    
+	# Загрузим изображение
+    left_image = Left_img[0]
+    right_image = Right_img[0]
+
 
     pass
 
